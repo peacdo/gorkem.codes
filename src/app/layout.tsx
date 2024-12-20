@@ -6,7 +6,7 @@ import Navigation from '@/components/Navigation';
 import './globals.css';
 
 export const metadata: Metadata = {
-    title: 'Görkem - Developer & Student',
+    title: 'Görkem Özyılmaz - Student',
     description: 'Software developer student, learning through building projects.',
 };
 

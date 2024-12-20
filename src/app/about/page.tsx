@@ -14,8 +14,8 @@ export default function AboutPage() {
 
                 <h2 className="text-2xl font-bold mt-12 mb-4">Background</h2>
                 <p className="mb-6">
-                    I started programming in [year] and have been working professionally as a developer since [year].
-                    My focus is on web technologies, particularly React, Node.js, and TypeScript.
+                    I started programming in high school with modding games.
+                    My focus is on DevOps, but I try to do projects in every area I can.
                     I enjoy solving complex problems and sharing knowledge with the developer community.
                 </p>
 
@@ -23,7 +23,9 @@ export default function AboutPage() {
                 <div className="mb-8">
                     <h3 className="text-xl font-semibold mb-3">Languages</h3>
                     <ul className="list-disc pl-4 mb-6 space-y-1">
-                        <li>JavaScript (ES6+)</li>
+                        <li>Python</li>
+                        <li>Lua</li>
+                        <li>JavaScript</li>
                         <li>TypeScript</li>
                         <li>HTML & CSS</li>
                         <li>SQL</li>
@@ -41,16 +43,12 @@ export default function AboutPage() {
                     <h3 className="text-xl font-semibold mb-3">Tools & Platforms</h3>
                     <ul className="list-disc pl-4 mb-6 space-y-1">
                         <li>Git</li>
-                        <li>VS Code</li>
-                        <li>Docker</li>
-                        <li>AWS</li>
                     </ul>
                 </div>
 
                 <h2 className="text-2xl font-bold mt-12 mb-4">Current Focus</h2>
                 <p className="mb-6">
-                    I&#39;m currently working on [current project or learning focus].
-                    My primary interests include [your interests, e.g., web performance, accessibility, etc.].
+                    I&#39;m currently learning about DevOps.
                 </p>
 
                 <h2 className="text-2xl font-bold mt-12 mb-4">Connect</h2>
@@ -85,7 +83,7 @@ export default function AboutPage() {
                     This website is built with Next.js and Tailwind CSS, deployed on Vercel.
                     The content is written in Markdown and the source code is available on{' '}
                     <Link
-                        href="https://github.com/yourusername/website"
+                        href="https://github.com/peacdo/gorkem.codes"
                         className="text-blue-600 dark:text-blue-400 hover:underline"
                     >
                         GitHub
