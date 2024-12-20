@@ -1,74 +1,71 @@
-// src/components/TableOfContents.tsx
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
+import React from 'react';
 
-interface TocHeading {
+interface Heading {
     id: string;
     text: string;
     level: number;
 }
 
-export default function TableOfContents() {
-    const [headings, setHeadings] = useState<TocHeading[]>([]);
-    const [activeId, setActiveId] = useState<string>('');
+const TableOfContents = () => {
+    const [activeHeading, setActiveHeading] = React.useState('');
+    const [headings, setHeadings] = React.useState<Heading[]>([]);
 
-    useEffect(() => {
-        const articleHeadings = document.querySelectorAll<HTMLHeadingElement>('article h2, article h3');
-        const headingItems: TocHeading[] = Array.from(articleHeadings).map(heading => ({
-            id: heading.id,
-            text: heading.textContent || '',
-            level: parseInt(heading.tagName[1])
-        }));
+    React.useEffect(() => {
+        const headingElements = document.querySelectorAll('article h2, article h3');
+        const headingArray: Heading[] = [];
 
-        setHeadings(headingItems);
+        headingElements.forEach((heading) => {
+            const id = heading.id;
+            const text = heading.textContent || '';
+            const level = Number(heading.tagName.charAt(1));
 
-        // Set up intersection observer
-        const callback: IntersectionObserverCallback = (entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    setActiveId(entry.target.id);
+            headingArray.push({ id, text, level });
+        });
+
+        setHeadings(headingArray);
+
+        const handleScroll = () => {
+            const headingElements = document.querySelectorAll('article h2, article h3');
+            headingElements.forEach((heading) => {
+                const { top } = heading.getBoundingClientRect();
+                if (top >= 0 && top <= 150) {
+                    setActiveHeading(heading.id);
                 }
             });
         };
 
-        const observer = new IntersectionObserver(callback, {
-            rootMargin: '-100px 0% -66% 0%'
-        });
-
-        articleHeadings.forEach(heading => observer.observe(heading));
-
-        return () => observer.disconnect();
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    if (headings.length === 0) {
-        return null;
-    }
+    const handleClick = (e: React.MouseEvent, id: string) => {
+        e.preventDefault();
+        const element = document.getElementById(id);
+        element?.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    if (headings.length === 0) return null;
 
     return (
-        <nav className="toc hidden lg:block">
+        <nav className="hidden lg:block">
             <div className="sticky top-8">
                 <h2 className="text-lg font-bold mb-4">Table of Contents</h2>
                 <ul className="space-y-2">
-                    {headings.map(heading => (
+                    {headings.map((heading) => (
                         <li
                             key={heading.id}
-                            style={{ paddingLeft: `${(heading.level - 2) * 1}rem` }}
+                            style={{ paddingLeft: `${(heading.level - 2)}rem` }}
                         >
                             <a
                                 href={`#${heading.id}`}
+                                onClick={(e) => handleClick(e, heading.id)}
                                 className={`block py-1 text-sm transition-colors ${
-                                    activeId === heading.id
-                                        ? 'text-[var(--link-color)]'
-                                        : 'text-[var(--secondary)] hover:text-[var(--link-color)]'
+                                    activeHeading === heading.id
+                                        ? 'text-primary'
+                                        : 'text-muted-foreground hover:text-primary'
                                 }`}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    document.querySelector(`#${heading.id}`)?.scrollIntoView({
-                                        behavior: 'smooth'
-                                    });
-                                }}
                             >
                                 {heading.text}
                             </a>
@@ -78,4 +75,6 @@ export default function TableOfContents() {
             </div>
         </nav>
     );
-}
+};
+
+export default TableOfContents;

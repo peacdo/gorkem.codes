@@ -18,7 +18,7 @@ export default function Error({
         <div className="flex flex-col items-center justify-center min-h-[50vh] text-center">
             <h2 className="text-2xl font-bold mb-4">Something went wrong!</h2>
             <p className="text-[var(--secondary)] mb-6">
-                We couldn't load this blog post. Please try again later.
+                We couldn&#39;t load this blog post. Please try again later.
             </p>
             <div className="flex gap-4">
                 <button

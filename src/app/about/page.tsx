@@ -9,7 +9,7 @@ export default function AboutPage() {
 
             <div className="prose dark:prose-invert">
                 <p className="text-lg mb-6">
-                    Hi, I'm Görkem. I built projects to learn about stuff.
+                    Hi, I&#39;m Görkem. I built projects to learn about stuff.
                 </p>
 
                 <h2 className="text-2xl font-bold mt-12 mb-4">Background</h2>
@@ -49,7 +49,7 @@ export default function AboutPage() {
 
                 <h2 className="text-2xl font-bold mt-12 mb-4">Current Focus</h2>
                 <p className="mb-6">
-                    I'm currently working on [current project or learning focus].
+                    I&#39;m currently working on [current project or learning focus].
                     My primary interests include [your interests, e.g., web performance, accessibility, etc.].
                 </p>
 

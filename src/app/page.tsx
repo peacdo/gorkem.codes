@@ -10,10 +10,10 @@ export default async function Home() {
         <div className="homepage">
             <section className="hero mb-16">
                 <h1 className="text-4xl font-bold text-[var(--primary)]">
-                    Hey, I'm Görkem
+                    Hey, I&#39;m Görkem
                 </h1>
                 <p className="text-lg text-[var(--primary)]">
-                    I'm a student learning software development and writing about the things I learn.
+                    I&#39;m a student learning software development and writing about the things I learn.
                     I focus on DevOps and full-stack development.
                 </p>
             </section>

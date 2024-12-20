@@ -2,19 +2,28 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-const projectsFile = path.join(process.cwd(), 'content/projects.md');
-
 export interface Project {
     title: string;
     description: string;
     github: string;
-    demo?: string;
-    tags: string[];
-    featured: boolean;
+    year?: number;
+    featured?: boolean;
+    tags?: string[];
+    links?: Array<{
+        label: string;
+        url: string;
+        isExternal: boolean;
+    }>;
 }
 
-export function getProjects(): Project[] {
+export async function getProjects(): Promise<Project[]> {
+    const projectsFile = path.join(process.cwd(), 'content/projects.md');
     const fileContents = fs.readFileSync(projectsFile, 'utf8');
     const { data } = matter(fileContents);
-    return data.projects;
+
+    return data.projects.map((project: any) => ({
+        ...project,
+        featured: project.featured ?? false,
+        tags: project.tags ?? [],
+    }));
 }

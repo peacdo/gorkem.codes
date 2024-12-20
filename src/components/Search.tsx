@@ -2,174 +2,114 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { Search as SearchIcon, X } from 'lucide-react';
-import Link from 'next/link';
-import { BlogPostPreview } from '@/lib/blog';
+import { Search as SearchIcon, Calendar, Tag } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { BlogPostPreview } from '@/lib/blog';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { cn } from '@/utils/cn';
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from 'cmdk';
 
 interface SearchProps {
     posts: BlogPostPreview[];
 }
 
 export function Search({ posts }: SearchProps) {
-    const [isOpen, setIsOpen] = useState(false);
-    const [query, setQuery] = useState('');
-    const [results, setResults] = useState<BlogPostPreview[]>([]);
-    const [selectedIndex, setSelectedIndex] = useState(-1);
+    const [open, setOpen] = useState(false);
     const router = useRouter();
 
-    // Search logic
-    const performSearch = useCallback((searchQuery: string) => {
-        if (!searchQuery.trim()) {
-            setResults([]);
-            return;
-        }
-
-        const searchWords = searchQuery.toLowerCase().split(' ');
-        const filtered = posts.filter(post => {
-            const searchContent = `${post.title} ${post.excerpt} ${post.tags.join(' ')}`.toLowerCase();
-            return searchWords.every(word => searchContent.includes(word));
-        });
-
-        setResults(filtered.slice(0, 5));
-    }, [posts]);
-
     useEffect(() => {
-        performSearch(query);
-    }, [query, performSearch]);
-
-    // Keyboard navigation
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            // Open search with Cmd/Ctrl + K
+        const down = (e: KeyboardEvent) => {
             if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
                 e.preventDefault();
-                setIsOpen(true);
-            }
-
-            // Close with Escape
-            if (e.key === 'Escape') {
-                setIsOpen(false);
-                setQuery('');
-                setSelectedIndex(-1);
-            }
-
-            if (isOpen) {
-                // Arrow key navigation
-                if (e.key === 'ArrowDown') {
-                    e.preventDefault();
-                    setSelectedIndex(prev =>
-                        prev < results.length - 1 ? prev + 1 : prev
-                    );
-                }
-                if (e.key === 'ArrowUp') {
-                    e.preventDefault();
-                    setSelectedIndex(prev => prev > 0 ? prev - 1 : -1);
-                }
-                // Enter to select
-                if (e.key === 'Enter' && selectedIndex >= 0) {
-                    e.preventDefault();
-                    const selectedPost = results[selectedIndex];
-                    if (selectedPost) {
-                        router.push(`/blog/${selectedPost.slug}`);
-                        setIsOpen(false);
-                        setQuery('');
-                        setSelectedIndex(-1);
-                    }
-                }
+                setOpen((open) => !open);
             }
         };
 
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [isOpen, results, selectedIndex, router]);
+        document.addEventListener('keydown', down);
+        return () => document.removeEventListener('keydown', down);
+    }, []);
+
+    const runCommand = useCallback((command: () => unknown) => {
+        setOpen(false);
+        command();
+    }, []);
 
     return (
         <>
             <button
-                onClick={() => setIsOpen(true)}
-                className="flex items-center gap-2 px-3 py-1.5 text-sm text-[var(--secondary)] border border-[var(--border-color)] rounded-md hover:border-[var(--link-color)] transition-colors"
+                onClick={() => setOpen(true)}
+                className="inline-flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground bg-secondary/50 hover:bg-secondary rounded-md transition-colors"
                 aria-label="Search posts"
             >
                 <SearchIcon size={16} />
-                <span>Search</span>
-                <kbd className="hidden md:inline-block text-xs border border-[var(--border-color)] rounded px-1.5">
-                    ⌘K
+                <span className="hidden sm:inline">Search</span>
+                <kbd className="hidden md:inline-flex h-5 select-none items-center gap-1 rounded bg-background px-1.5 font-mono text-[10px] font-medium opacity-100">
+                    <span className="text-xs">⌘</span>K
                 </kbd>
             </button>
 
-            {isOpen && (
-                <div className="fixed inset-0 z-50 overflow-y-auto px-4 py-4 sm:py-20">
-                    <div className="fixed inset-0 bg-black/20 backdrop-blur-sm dark:bg-black/50"
-                         onClick={() => setIsOpen(false)} />
-
-                    <div className="relative mx-auto max-w-xl rounded-xl bg-[var(--background)] shadow-2xl ring-1 ring-[var(--border-color)]">
-                        <div className="flex items-center border-b border-[var(--border-color)] px-4">
-                            <SearchIcon size={20} className="text-[var(--secondary)]" />
-                            <input
-                                type="text"
-                                value={query}
-                                onChange={(e) => setQuery(e.target.value)}
+            <Dialog open={open} onOpenChange={setOpen}>
+                <DialogContent className="overflow-hidden p-0">
+                    <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
+                        <div className="flex items-center border-b px-3" cmdk-input-wrapper="">
+                            <SearchIcon className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+                            <CommandInput
                                 placeholder="Search posts..."
-                                className="flex-1 bg-transparent px-4 py-4 text-[var(--font-color)] placeholder-[var(--secondary)] outline-none"
-                                autoFocus
+                                className="flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
                             />
-                            {query && (
-                                <button
-                                    onClick={() => setQuery('')}
-                                    className="text-[var(--secondary)] hover:text-[var(--font-color)]"
-                                >
-                                    <X size={20} />
-                                </button>
-                            )}
                         </div>
-
-                        {results.length > 0 && (
-                            <ul className="max-h-[40vh] overflow-y-auto py-2">
-                                {results.map((post, index) => (
-                                    <li key={post.slug}>
-                                        <Link
-                                            href={`/blog/${post.slug}`}
-                                            onClick={() => {
-                                                setIsOpen(false);
-                                                setQuery('');
-                                            }}
-                                            className={`block px-4 py-3 hover:bg-[var(--background-secondary)] ${
-                                                index === selectedIndex ? 'bg-[var(--background-secondary)]' : ''
-                                            }`}
-                                        >
-                                            <h3 className="text-base font-medium text-[var(--font-color)]">
-                                                {post.title}
-                                            </h3>
-                                            {post.excerpt && (
-                                                <p className="mt-1 text-sm text-[var(--secondary)] line-clamp-2">
-                                                    {post.excerpt}
-                                                </p>
-                                            )}
-                                        </Link>
-                                    </li>
+                        <CommandList className="max-h-[300px] overflow-y-auto overflow-x-hidden">
+                            <CommandEmpty>No results found.</CommandEmpty>
+                            <CommandGroup heading="Posts">
+                                {posts.map((post) => (
+                                    <CommandItem
+                                        key={post.slug}
+                                        value={post.title}
+                                        onSelect={() => {
+                                            runCommand(() => router.push(`/blog/${post.slug}`));
+                                        }}
+                                        className={cn(
+                                            "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none",
+                                            "aria-selected:bg-accent aria-selected:text-accent-foreground",
+                                            "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+                                            "flex flex-col items-start gap-1"
+                                        )}
+                                    >
+                                        <div className="flex items-center gap-2 w-full">
+                                            <span className="font-medium flex-1">{post.title}</span>
+                                            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                                <Calendar size={12} />
+                                                <span>
+                          {new Date(post.date).toLocaleDateString('en-US', {
+                              year: 'numeric',
+                              month: 'short',
+                              day: 'numeric'
+                          })}
+                        </span>
+                                            </div>
+                                        </div>
+                                        {post.excerpt && (
+                                            <p className="text-sm text-muted-foreground line-clamp-1 w-full">
+                                                {post.excerpt}
+                                            </p>
+                                        )}
+                                        {post.tags && post.tags.length > 0 && (
+                                            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                                <Tag size={12} />
+                                                {post.tags.map((tag) => (
+                                                    <span key={tag} className="bg-secondary/50 px-1.5 py-0.5 rounded">
+                            {tag}
+                          </span>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </CommandItem>
                                 ))}
-                            </ul>
-                        )}
-
-                        {query && results.length === 0 && (
-                            <div className="p-6 text-center text-[var(--secondary)]">
-                                No results found for "{query}"
-                            </div>
-                        )}
-
-                        <div className="border-t border-[var(--border-color)] px-4 py-3 text-xs text-[var(--secondary)]">
-                            <kbd className="mr-1 rounded border border-[var(--border-color)] px-1.5">↑</kbd>
-                            <kbd className="mr-3 rounded border border-[var(--border-color)] px-1.5">↓</kbd>
-                            to navigate
-                            <kbd className="mx-3 rounded border border-[var(--border-color)] px-1.5">Enter</kbd>
-                            to select
-                            <kbd className="mx-3 rounded border border-[var(--border-color)] px-1.5">Esc</kbd>
-                            to close
-                        </div>
-                    </div>
-                </div>
-            )}
+                            </CommandGroup>
+                        </CommandList>
+                    </Command>
+                </DialogContent>
+            </Dialog>
         </>
     );
 }

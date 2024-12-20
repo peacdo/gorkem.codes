@@ -2,41 +2,50 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState } from 'react';
-import { themes, type ThemeName } from '../lib/theme';
+import '../styles/theme.css';
+
+type Theme = 'light' | 'dark';
 
 type ThemeContextType = {
-    theme: ThemeName;
-    setTheme: (theme: ThemeName) => void;
+    theme: Theme;
+    setTheme: (theme: Theme) => void;
 };
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-    const [theme, setTheme] = useState<ThemeName>('light');
+    const [theme, setTheme] = useState<Theme>('light');
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        const savedTheme = localStorage.getItem('theme') as ThemeName;
-        if (savedTheme && themes[savedTheme]) {
-            setTheme(savedTheme);
-        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            setTheme('dark');
-        }
+        setMounted(true);
+        // Check local storage
+        const savedTheme = localStorage.getItem('theme') as Theme;
+        // Check system preference
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+        // Set theme based on saved preference or system preference
+        const initialTheme = savedTheme || systemTheme;
+        setTheme(initialTheme);
+        document.documentElement.classList.toggle('dark', initialTheme === 'dark');
     }, []);
 
-    useEffect(() => {
-        const root = document.documentElement;
-        const colors = themes[theme].colors;
+    const value = {
+        theme,
+        setTheme: (newTheme: Theme) => {
+            setTheme(newTheme);
+            localStorage.setItem('theme', newTheme);
+            document.documentElement.classList.toggle('dark', newTheme === 'dark');
+        },
+    };
 
-        // Apply theme colors
-        Object.entries(colors).forEach(([key, value]) => {
-            root.style.setProperty(`--${key}`, value);
-        });
-
-        localStorage.setItem('theme', theme);
-    }, [theme]);
+    // Prevent flash of wrong theme
+    if (!mounted) {
+        return null;
+    }
 
     return (
-        <ThemeContext.Provider value={{ theme, setTheme }}>
+        <ThemeContext.Provider value={value}>
             {children}
         </ThemeContext.Provider>
     );

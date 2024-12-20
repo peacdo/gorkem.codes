@@ -7,34 +7,58 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: ["class"],
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
+      colors: {
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+      },
       typography: {
         DEFAULT: {
           css: {
-            maxWidth: '100%',
-            color: 'var(--font-color)',
-            a: {
-              color: 'var(--link-color)',
-              textDecoration: 'none',
-              '&:hover': {
-                textDecoration: 'underline',
-              },
+            'code::before': {
+              content: '""'
             },
-            code: {
-              color: 'inherit',
-              background: 'var(--code-background)',
-              padding: '0.25rem 0.4rem',
-              borderRadius: '0.25rem',
-            },
-          },
-        },
+            'code::after': {
+              content: '""'
+            }
+          }
+        }
+      },
+      fontFamily: {
+        sans: ['var(--font-family)'],
+        mono: ['var(--font-family-mono)'],
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-  ],
+  plugins: [],
 };
 
 export default config;
