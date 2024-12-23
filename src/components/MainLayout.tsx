@@ -1,7 +1,6 @@
-// src/components/MainLayout.tsx
 import React from 'react';
 import Link from 'next/link';
-import { Github, Mail, Linkedin } from 'lucide-react';
+import { Github, Mail, Linkedin, Film } from 'lucide-react';
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
     return (
@@ -41,6 +40,14 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
                                 >
                                     <Linkedin size={18} />
                                     <span>LinkedIn</span>
+                                </Link>
+                                <Link
+                                    href="https://letterboxd.com/peacdo"
+                                    target="_blank"
+                                    className="flex items-center gap-2 hover:text-primary"
+                                >
+                                    <Film size={18} />
+                                    <span>Letterboxd</span>
                                 </Link>
                                 <Link
                                     href="mailto:gorkemozyilmaz@outlook.com"

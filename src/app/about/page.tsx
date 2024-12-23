@@ -1,6 +1,5 @@
-// src/app/about/page.tsx
 import Link from 'next/link';
-import { Github, Mail, Linkedin } from 'lucide-react';
+import { Github, Mail, Linkedin, Film } from 'lucide-react';
 
 export default function AboutPage() {
     return (
@@ -68,6 +67,14 @@ export default function AboutPage() {
                     >
                         <Linkedin size={20} />
                         <span>LinkedIn</span>
+                    </Link>
+                    <Link
+                        href="https://letterboxd.com/peacdo"
+                        target="_blank"
+                        className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
+                    >
+                        <Film size={20} />
+                        <span>Letterboxd</span>
                     </Link>
                     <Link
                         href="mailto:gorkemozyilmaz@outlook.com"
