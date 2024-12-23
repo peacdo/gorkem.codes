@@ -1,4 +1,13 @@
-I'll provide a beginner-friendly guide to pushing your changes to GitHub and deploying.
+
+---
+title: "Getting Started with Github Pages"
+date: "2024-12-23"
+tags: ["github", "gh-pages", "webdev"]
+excerpt: "Learn how to deploy static website free with GitHub Pages."
+featured: true
+series: "Hosting"
+---
+
 
 # Basic Git Commands for Beginners
 
