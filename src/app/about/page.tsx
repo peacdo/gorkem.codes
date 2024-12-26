@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Github, Mail, Linkedin, Film } from 'lucide-react';
+import {Github, Mail, Linkedin, Film, Music} from 'lucide-react';
 
 export default function AboutPage() {
     return (
@@ -75,6 +75,14 @@ export default function AboutPage() {
                     >
                         <Film size={20} />
                         <span>Letterboxd</span>
+                    </Link>
+                    <Link
+                        href="https://open.spotify.com/user/9xxxd9buw9bpmbrojfhpb53me?si=f00c685bd92441eb"
+                        target="_blank"
+                        className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
+                    >
+                        <Music size={20} />
+                        <span>Spotify</span>
                     </Link>
                     <Link
                         href="mailto:gorkemozyilmaz@outlook.com"

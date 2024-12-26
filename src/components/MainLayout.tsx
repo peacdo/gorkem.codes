@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Github, Mail, Linkedin, Film } from 'lucide-react';
+import { Github, Mail, Linkedin, Film, Music } from 'lucide-react';
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
     return (
@@ -48,6 +48,14 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
                                 >
                                     <Film size={18} />
                                     <span>Letterboxd</span>
+                                </Link>
+                                <Link
+                                    href="https://open.spotify.com/user/9xxxd9buw9bpmbrojfhpb53me?si=f00c685bd92441eb"
+                                    target="_blank"
+                                    className="flex items-center gap-2 hover:text-primary"
+                                >
+                                    <Music size={18} />
+                                    <span>Spotify</span>
                                 </Link>
                                 <Link
                                     href="mailto:gorkemozyilmaz@outlook.com"
