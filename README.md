@@ -1,5 +1,6 @@
 # gorkem.codes
 
+Personal website and portfolio of Görkem Özyılmaz, featuring a blog, projects showcase, and more.
 
 ## Getting Started
 
@@ -39,40 +40,62 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Features
 
-- ⚡️ Next.js with App Router
+- ⚡️ Next.js 14 with App Router
 - 🎨 Tailwind CSS for styling
 - 📝 TypeScript for type safety
-- 🔤 [Geist](https://vercel.com/font) font optimization with `next/font`
-- 🔍 ESLint for code linting
-
-## Development
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- 📚 Markdown-based blog with frontmatter
+- 🔍 Full-text search functionality
+- 🌓 Dark/Light theme switching
+- 🎯 SEO optimized
+- 📱 Fully responsive design
+- ⚡️ Fast page loads with static generation
+- 🔤 [Geist](https://vercel.com/font) font optimization
 
 ## Project Structure
 
 ```
-project-name/
-├── app/             # App router directory
-├── components/      # React components
-├── public/          # Static assets
-└── types/          # TypeScript type definitions
+gorkem.codes/
+├── src/
+│   ├── app/             # Next.js app router pages
+│   ├── components/      # React components
+│   ├── lib/            # Utility functions
+│   ├── styles/         # Global styles
+│   └── types/          # TypeScript types
+├── content/
+│   ├── blog/           # Markdown blog posts
+│   └── projects.md     # Projects data
+├── public/             # Static assets
+└── [config files]      # Various configuration files
 ```
+
+## Content Management
+
+### Blog Posts
+Add new blog posts by creating markdown files in `content/blog/` with the following frontmatter:
+
+```markdown
+---
+title: "Post Title"
+date: "YYYY-MM-DD"
+tags: ["tag1", "tag2"]
+excerpt: "Brief description"
+featured: true|false
+series: "Optional Series Name"
+---
+```
+
+### Projects
+Edit `content/projects.md` to manage the projects showcase.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs) - learn about Tailwind CSS
-- [TypeScript Documentation](https://www.typescriptlang.org/docs) - learn TypeScript
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [TypeScript Documentation](https://www.typescriptlang.org/docs)
 
 ## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The site is deployed on Vercel. Push to main branch to trigger automatic deployment.
 
 ## License
 
