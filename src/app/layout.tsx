@@ -10,7 +10,14 @@ export const metadata: Metadata = {
     title: 'Görkem Özyılmaz - Student',
     description: 'Software developer student, learning through building projects.',
     icons: {
-        icon: '/favicon.ico',
+        icon: [
+            { url: '/favicon.ico' },
+            { url: '/favicon.ico', sizes: '32x32' },
+            { url: '/favicon.ico', sizes: '16x16' },
+        ],
+        apple: [
+            { url: '/favicon.ico' },
+        ],
     },
 };
 
