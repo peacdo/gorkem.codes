@@ -1,30 +1,26 @@
 // src/app/layout.tsx
 import type { Metadata } from 'next';
-import { ThemeProvider } from '@/components/ThemeProvider';
-import MainLayout from '@/components/MainLayout';
-import Navigation from '@/components/Navigation';
+import { Inter } from 'next/font/google';
 import './globals.css';
 
+const inter = Inter({ subsets: ['latin'] });
+
 export const metadata: Metadata = {
-    title: 'Görkem Özyılmaz - Student',
-    description: 'Software developer student, learning through building projects.',
+    title: 'gorkem.codes',
+    description: 'Personal website of Gorkem',
+    icons: {
+        icon: '/favicon.ico',
+    },
 };
 
 export default function RootLayout({
-                                       children,
-                                   }: {
-    children: React.ReactNode;
+    children,
+}: {
+    children: React.ReactNode
 }) {
     return (
-        <html lang="en" suppressHydrationWarning>
-        <body>
-        <ThemeProvider>
-            <Navigation />
-            <MainLayout>
-                {children}
-            </MainLayout>
-        </ThemeProvider>
-        </body>
+        <html lang="en">
+            <body className={inter.className}>{children}</body>
         </html>
     );
 }
