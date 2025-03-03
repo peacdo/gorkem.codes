@@ -5,6 +5,15 @@ import { ThemeProvider } from '@/components/ThemeProvider';
 import MainLayout from '@/components/MainLayout';
 import Navigation from '@/components/Navigation';
 import './globals.css';
+import { Outfit } from 'next/font/google';
+
+const outfit = Outfit({
+    subsets: ['latin'],
+    // A nice range of weights for versatility
+    weight: ['300', '400', '500', '600', '700'],
+    display: 'swap',
+    variable: '--font-outfit',
+});
 
 export const metadata: Metadata = {
     title: 'Görkem Özyılmaz - Student',
@@ -27,8 +36,8 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en" suppressHydrationWarning>
-            <body>
+        <html lang="en" suppressHydrationWarning className={outfit.variable}>
+            <body className={outfit.className}>
                 <ThemeProvider>
                     <Navigation />
                     <MainLayout>

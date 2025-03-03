@@ -5,9 +5,43 @@ import { Github, Mail, Linkedin, Film, Music } from 'lucide-react';
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
     return (
         <div className="min-h-screen">
-            <div className="max-w-6xl mx-auto px-4 py-8">
-                <div className="lg:grid lg:grid-cols-[280px_1fr] lg:gap-8">
-                    <aside className="hidden lg:block">
+            <div className="max-w-6xl mx-auto px-4 py-4 md:py-8">
+                <div className="md:grid md:grid-cols-[240px_1fr] lg:grid-cols-[280px_1fr] md:gap-8">
+                    {/* Mobile Info Banner */}
+                    <div className="md:hidden py-4 mb-6 text-center">
+                        <p className="text-sm text-muted-foreground">
+                            Student and developer learning through building projects
+                        </p>
+                        {/* Mobile Social Links */}
+                        <div className="flex justify-center gap-4 mt-4">
+                            <Link
+                                href="https://github.com/peacdo"
+                                target="_blank"
+                                className="p-2 hover:text-primary"
+                                aria-label="GitHub"
+                            >
+                                <Github size={20} />
+                            </Link>
+                            <Link
+                                href="https://linkedin.com/in/gorkemozyilmaz"
+                                target="_blank"
+                                className="p-2 hover:text-primary"
+                                aria-label="LinkedIn"
+                            >
+                                <Linkedin size={20} />
+                            </Link>
+                            <Link
+                                href="mailto:gorkemozyilmaz@outlook.com"
+                                className="p-2 hover:text-primary"
+                                aria-label="Email"
+                            >
+                                <Mail size={20} />
+                            </Link>
+                        </div>
+                    </div>
+
+                    {/* Desktop Sidebar */}
+                    <aside className="hidden md:block">
                         <div className="sticky top-8 space-y-8">
                             <div className="space-y-4">
                                 <Link href="/" className="block font-bold text-xl hover:text-primary">
@@ -73,7 +107,8 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
                         </div>
                     </aside>
 
-                    <main className="pt-8 lg:pt-0">
+                    {/* Main Content */}
+                    <main className="md:pt-0">
                         {children}
                     </main>
                 </div>

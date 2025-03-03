@@ -1,13 +1,15 @@
 // src/app/page.tsx
 import Link from 'next/link';
 import { getAllPosts, formatDisplayDate } from '@/lib/blog';
+import { GitHubActivity } from '@/components/GitHubActivity';
+import { Demos } from '@/components/Demos';
 
 export default async function Home() {
     const posts = await getAllPosts();
     const latestPosts = posts.slice(0, 5);
 
     return (
-        <div className="homepage">
+        <div className="homepage space-y-12">
             <section className="hero mb-16">
                 <h1 className="text-4xl font-bold text-[var(--primary)]">
                     Hey, I&#39;m Görkem
@@ -16,6 +18,11 @@ export default async function Home() {
                     I&#39;m a student learning software development and writing about the things I learn.
                     I focus on DevOps and full-stack development.
                 </p>
+            </section>
+
+            <section>
+                <h2 className="text-2xl font-bold mb-4">GitHub Activity</h2>
+                <GitHubActivity />
             </section>
 
             <section className="latest-posts">
@@ -42,6 +49,8 @@ export default async function Home() {
                     View all posts →
                 </Link>
             </section>
+
+            <Demos />
         </div>
     );
 }

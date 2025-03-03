@@ -53,8 +53,8 @@ const config: Config = {
         }
       },
       fontFamily: {
-        sans: ['var(--font-family)'],
-        mono: ['var(--font-family-mono)'],
+        sans: ['var(--font-roboto)'],
+        mono: ['var(--font-roboto)'],
       },
     },
   },

@@ -38,20 +38,20 @@ export function Search({ posts }: SearchProps) {
         <>
             <button
                 onClick={() => setOpen(true)}
-                className="inline-flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground bg-secondary/50 hover:bg-secondary rounded-md transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-1.5 text-muted-foreground bg-secondary/30 hover:bg-secondary/50 rounded-full transition-colors w-40 font-mono"
                 aria-label="Search posts"
             >
-                <SearchIcon size={16} />
-                <span className="hidden sm:inline">Search</span>
-                <kbd className="hidden md:inline-flex h-5 select-none items-center gap-1 rounded bg-background px-1.5 font-mono text-[10px] font-medium opacity-100">
-                    <span className="text-xs">⌘</span>K
+                <SearchIcon size={18} />
+                <span className="text-sm">Search</span>
+                <kbd className="ml-auto text-xs bg-secondary/50 px-1.5 rounded font-mono">
+                    ⌘K
                 </kbd>
             </button>
 
             <Dialog open={open} onOpenChange={setOpen}>
-                <DialogContent className="overflow-hidden p-0">
+                <DialogContent className="overflow-hidden p-0 sm:max-w-2xl sm:rounded-xl">
                     <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
-                        <div className="flex items-center border-b px-3" cmdk-input-wrapper="">
+                        <div className="flex items-center border-b px-4" cmdk-input-wrapper="">
                             <SearchIcon className="mr-2 h-4 w-4 shrink-0 opacity-50" />
                             <CommandInput
                                 placeholder="Search posts..."

@@ -27,8 +27,8 @@ export default function ProjectsList({ initialProjects }: ProjectsListProps) {
         <div className="space-y-8">
             {/* Tags filter */}
             {allTags.length > 0 && (
-                <div className="space-y-4">
-                    <div className="flex flex-wrap gap-2">
+                <div className="space-y-4 overflow-x-auto pb-2">
+                    <div className="flex flex-nowrap gap-2 md:flex-wrap">
                         <button
                             onClick={() => setFilter(null)}
                             className={`rounded-full px-3 py-1 text-sm transition-colors
@@ -53,7 +53,9 @@ export default function ProjectsList({ initialProjects }: ProjectsListProps) {
             {/* Featured Projects Section */}
             {projects.some((p) => p.featured) && (
                 <section className="space-y-4">
-                    <h2 className="text-2xl font-bold tracking-tight">Featured Projects</h2>
+                    <h2 className="text-xl md:text-2xl font-bold tracking-tight">
+                        Featured Projects
+                    </h2>
                     <div className="grid gap-4 sm:grid-cols-2">
                         {projects
                             .filter((p) => p.featured)
