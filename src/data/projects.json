@@ -1,0 +1,30 @@
+[
+  {
+    "title": "smart-inv",
+    "category": "Learning Project",
+    "description": "I am building a simple version of a web based inventory management system with next.js. After I learn how to fine-tune a inventory-stock management system I am planning to build it in Java.",
+    "techstacks": ["Next.js", "Payload CMS"],
+    "link": "https://github.com/peacdo/smart-inv"
+  },
+  {
+    "title": "gorkem.codes",
+    "category": "Personal Website",
+    "description": "This is my personal website that I built with Next.js and Tailwind CSS. I am using it to showcase my projects and skills. Also planning to add a blog to it(and hopefully write some posts).",
+    "techstacks": ["Next.js", "Tailwind CSS", "Shadcn UI", "Framer Motion"],
+    "link": "https://github.com/peacdo/gorkem.codes"
+  },
+  {
+    "title": "biparca.store",
+    "category": "Open Source E-Commerce Platform",
+    "description": "Website for our small 3d business, currently working on it.",
+    "techstacks": ["Next.js", "Tailwind CSS", "Shadcn UI", "TypeScript", "Firebase", "Three.js", "PostgreSQL"],
+    "link": "https://github.com/peacdo/biparca-store"
+  },
+  {
+    "title": "HCI Portal",
+    "category": "Content Management System",
+    "description": "A content management system for a university course.",
+    "techstacks": ["React", "TypeScript", "Firebase", "Material UI"],
+    "link": "https://github.com/peacdo/hci-portal"
+  }
+] 
