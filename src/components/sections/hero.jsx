@@ -142,7 +142,7 @@ const Hero = () => {
             I started programming in middle school as a coding hobbyist in 2018 and later moved into game modding. Since 2023, I&apos;ve been studying computer science with a focus on DevOps. I recently completed an internship where I built and deployed applications using Kubernetes, Docker, and CI/CD pipelines. I enjoy solving complex problems and sharing knowledge with the developer community.
           </p>
           <p className="mb-4">
-            Outside of work, I&apos;m usually at the gym, playing video games, reading, or watching TV series and documentaries. Traveling is another one of my passions, and I&apos;m always looking for new adventures.
+            Outside of work, I enjoy reading, or watching TV series and documentaries. Traveling is another one of my passions, and I&apos;m always looking for new adventures.
           </p>
         </div>
       </div>
